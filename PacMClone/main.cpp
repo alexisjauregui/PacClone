@@ -13,7 +13,10 @@ int main() {
     cout << "Hello, World!" << endl;
 
     //Applications variables
-    sf::RenderWindow window(sf::VideoMode(448, 567), "Pong");
+    sf::RenderWindow window(sf::VideoMode(448, 567), "PacMan");
+    window.setKeyRepeatEnabled(false);
+    window.setVerticalSyncEnabled(1); // Setting max framerate to 60 (Facultative)
+    window.setFramerateLimit(60);
 
     coreState.set_window(&window);
     coreState.set_state(new main_state());

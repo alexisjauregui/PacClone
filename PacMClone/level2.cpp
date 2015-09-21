@@ -1,18 +1,19 @@
 //
-// Created by Alexis Jauregui on 8/7/15.
+// Created by Alexis Jauregui on 9/20/15.
 //
 
-#include "pac_game.h"
+#include "level2.h"
 
-void pac_game::Initialize(sf::RenderWindow *window) {
+
+void level2::Initialize(sf::RenderWindow *window) {
     this->puck1 = new puck();
     this->puck1->initialize(window);
     this->score1 = new score();
     this->score1->Initialize(window);
     this->map1 = new map();
-    this->map1->Initialize("maps/map1.txt");
+    this->map1->Initialize("maps/map2.txt");
     this->dots1 = new dots();
-    this->dots1->Initialize("maps/dots.txt");
+    this->dots1->Initialize("maps/dots2.txt");
 
     this->red = new ghost();
     this->red->Initialiaze(0);
@@ -27,7 +28,7 @@ void pac_game::Initialize(sf::RenderWindow *window) {
     this->lives->Initialize();
 
     this->ghostai1 = new ghostai();
-    this->ghostai1->Initialize(1);
+    this->ghostai1->Initialize(2);
 
     this->font = new sf::Font();
     this->font->loadFromFile("media/DroidSans.ttf");
@@ -42,19 +43,16 @@ void pac_game::Initialize(sf::RenderWindow *window) {
                            this->text1->getGlobalBounds().height/2+100);
     this->text2->setPosition({448/2, 567/2});
 
-    this->clockR = new sf::Clock();
 
     paused = false;
     gameover = false;
-    resetClock1 = true;
-
 
 
 
 
 }
 
-void pac_game::Update(sf::RenderWindow *window) {
+void level2::Update(sf::RenderWindow *window) {
 
 
     this->score1->Update(window);
@@ -73,9 +71,9 @@ void pac_game::Update(sf::RenderWindow *window) {
             if (this->score1->number > 140)
                 this->blue->Update(window, this->score1, 1);
             if (this->score1->number > 250)
-            this->green->Update(window, this->score1,2);
-            if (this->score1->number > 300)
-            this->pink->Update(window, this->score1,3);
+                this->green->Update(window, this->score1,2);
+            if (this->score1->number > 700)
+                this->pink->Update(window, this->score1,3);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and !keyPressed) {
                 paused = true;
             }
@@ -124,15 +122,14 @@ void pac_game::Update(sf::RenderWindow *window) {
         this->green->Initialiaze(2);
         this->pink->Initialiaze(3);
         this->ghostai1->Initialize(1);
-
         this->puck1->initialize(window);
         if(!gameover)
-        paused = true;
+            paused = true;
     }
 
 }
 
-void pac_game::Render(sf::RenderWindow *window) {
+void level2::Render(sf::RenderWindow *window) {
     this->map1->Render(window);
     this->dots1->Render(window);
 
@@ -151,7 +148,7 @@ void pac_game::Render(sf::RenderWindow *window) {
 
 }
 
-void pac_game::Destroy(sf::RenderWindow *window) {
+void level2::Destroy(sf::RenderWindow *window) {
 
     delete(this->puck1);
 

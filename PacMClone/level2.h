@@ -1,10 +1,9 @@
 //
-// Created by Alexis Jauregui on 8/7/15.
+// Created by Alexis Jauregui on 9/20/15.
 //
 
-#ifndef PACM_PAC_GAME_H
-#define PACM_PAC_GAME_H
-
+#ifndef PACM_LEVEL2_H
+#define PACM_LEVEL2_H
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -21,12 +20,13 @@
 #include "ghostai.h"
 
 
-class pac_game :public tiny_state {
+
+class level2 :public tiny_state {
 public:
-void Initialize(sf::RenderWindow* window);
-void Update(sf::RenderWindow* window);
-void Render(sf::RenderWindow* window);
-void Destroy(sf::RenderWindow* window);
+    void Initialize(sf::RenderWindow* window);
+    void Update(sf::RenderWindow* window);
+    void Render(sf::RenderWindow* window);
+    void Destroy(sf::RenderWindow* window);
 
 private:
 
@@ -45,17 +45,17 @@ private:
     sf::Font* font;
     sf::Text* text1;
     sf::Text* text2;
-   
+
     bool paused;
     bool keyPressed;
     bool gameover;
 
 
 
-
-
-
 };
 
 
-#endif //PACM_PAC_GAME_H
+
+
+
+#endif //PACM_LEVEL2_H

@@ -26,6 +26,9 @@ void Lives::Update(puck *puck1, ghost *ghost1) {
         width -= 16;
        this->lives->setTextureRect(sf::IntRect(0,0,width,16));
         puck1->pSprite->setPosition({210,295});
+        puck1->reset = true;
+
+
 
     }
 

@@ -15,7 +15,7 @@
 class ghost {
 public:
     void Initialiaze(int i);
-    void Update(sf::RenderWindow* window,score* score1);
+    void Update(sf::RenderWindow* window,score* score1,int i);
     void Render(sf::RenderWindow* window);
 
     float frameCounter = 0, switchFrame = 100, frameSpeed = 750;
@@ -25,11 +25,14 @@ public:
     sf::Sprite sprite1;
     sf::Vector2i source;
     sf::Clock clock2;
+    sf::Clock clock3;
     sf::Vector2f startPos;
+    sf::Vector2f velocity;
 
     bool yo;
     bool fright;
     bool reset;
+    bool resetClock;
     float temp;
 
 

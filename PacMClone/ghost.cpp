@@ -12,24 +12,31 @@ void ghost::Initialiaze(int i) {
             texture1.loadFromFile("media/ghost.png");
             startPos.x = 208;
             startPos.y = 200;
+            velocity.x = -2;
+            velocity.y = 0;
             break;
         case 1:
             texture1.loadFromFile("media/blue.png");
-            //175
-            startPos.x = 90;
+            startPos.x = 175;
             startPos.y = 250;
+            velocity.x = 0;
+            velocity.y = 0;
             break;
         case 2:
             texture1.loadFromFile("media/green.png");
             //240
-            startPos.x = 350;
+            startPos.x = 240;
             startPos.y = 250;
+            velocity.x = 0;
+            velocity.y = 0;
             break;
         case 3:
             texture1.loadFromFile("media/pink.png");
             //208
             startPos.x = 208;
-            startPos.y = 487;
+            startPos.y = 250;
+            velocity.x = 0;
+            velocity.y = 0;
             break;
         default:
             break;
@@ -37,14 +44,17 @@ void ghost::Initialiaze(int i) {
 
     sprite1.setTexture(texture1);
     sprite1.setPosition(startPos);
+    sprite1.setTextureRect(sf::IntRect(0, 0, 32, 32));
 
     scared.loadFromFile("media/ghostV.png");
 
+
     clock2.restart();
+    resetClock = true;
     yo= true;
 }
 
-void ghost::Update(sf::RenderWindow *window,score* score1) {
+void ghost::Update(sf::RenderWindow *window,score* score1,int i) {
 
     frameCounter += frameSpeed * clock1.restart().asSeconds();
     if (frameCounter >= switchFrame)
@@ -56,7 +66,9 @@ void ghost::Update(sf::RenderWindow *window,score* score1) {
     }
 
     sprite1.setTextureRect(sf::IntRect(source.x * 32, source.y * 32, 32, 32));
+    sprite1.move(velocity);
 
+//Power Pellet Mode
     if(score1->go)
     {
         if(yo){
@@ -83,10 +95,51 @@ void ghost::Update(sf::RenderWindow *window,score* score1) {
         fright = false;
     }
 
-    if(reset){
-        sprite1.setPosition({0,0});
-        reset = false;
+   switch (i){
+       case 0:
+           if(sprite1.getPosition().x == 208 and sprite1.getPosition().y == 200 ) {
+               velocity.x = -2;
+           }
+           break;
+       case  1:
+           if(sprite1.getPosition().x == 175 and sprite1.getPosition().y == 250 ){
+               sprite1.setPosition({208,200});
+               velocity.x = -2;
+           }
+           break;
+       case 2:
+           if(sprite1.getPosition().x == 240 and sprite1.getPosition().y == 250 ){
+               sprite1.setPosition({208,200});
+               velocity.x = 2;
+           }
+           break;
+       case 3:
+           if(sprite1.getPosition().x == 208 and sprite1.getPosition().y == 250 ){
+               sprite1.setPosition({207,200});
+               velocity.x = -2;
+           }
+           break;
+       default:
+           break;
+   }
+
+
+    if(reset) {
+        sprite1.setPosition({startPos.x + 1, startPos.y + 1});
+        velocity.x = 0;
+        velocity.y = 0;
+        if (resetClock) {
+            clock3.restart();
+            resetClock = false;
+        }
+        if(clock3.getElapsedTime().asSeconds() > 7)
+        {
+            sprite1.setPosition(startPos);
+            resetClock = true;
+            reset = false;
+        }
     }
+
 
 }
 

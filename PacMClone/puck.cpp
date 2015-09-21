@@ -16,7 +16,7 @@ void puck::initialize(sf::RenderWindow *window) {
     this->pSprite->setTexture(pTexture);
     this->pSprite->setPosition(210,295);
 
-    this->velocity = new sf::Vector2f({-.5,0});
+    this->velocity = new sf::Vector2f({-3,0});
 
     rectangleShape1.setPosition(this->pSprite->getPosition().x+12,
                                 this->pSprite->getPosition().y+12);
@@ -29,6 +29,8 @@ void puck::initialize(sf::RenderWindow *window) {
     this->wakka->setBuffer(buffer);
     this->wakka->play();
     this->wakka->setLoop(true);
+    this->pSprite->setTextureRect(sf::IntRect(0,0,32,32));
+    reset = false;
 }
 
 void puck::Update(sf::RenderWindow *window) {
@@ -37,26 +39,26 @@ void puck::Update(sf::RenderWindow *window) {
     {
         source.y = Down;
         this->velocity->x = 0;
-        this->velocity->y = -.5;
+        this->velocity->y = -3;
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         source.y = Up;
         this->velocity->x = 0;
-        this->velocity->y = .5;
+        this->velocity->y = 3;
 
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         source.y = Left;
         this->velocity->y = 0;
-        this->velocity->x = -.5;
+        this->velocity->x = -3;
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         source.y = Right;
         this->velocity->y = 0;
-        this->velocity->x = .5;
+        this->velocity->x = 3;
     }
 
     this->pSprite->move({velocity->x,velocity->y});
@@ -88,10 +90,10 @@ void puck::Update(sf::RenderWindow *window) {
                                 this->pSprite->getPosition().y+12);
 
     if(this->pSprite->getPosition().x < 0){
-        this->pSprite->setPosition(411,249);
+        this->pSprite->setPosition(411,this->pSprite->getPosition().y);
     }
     if(this->pSprite->getPosition().x > 448){
-        this->pSprite->setPosition(0,249);
+        this->pSprite->setPosition(0,this->pSprite->getPosition().y);
     }
  }
 
@@ -99,8 +101,7 @@ void puck::Update(sf::RenderWindow *window) {
 
 
 void puck::Render(sf::RenderWindow *window) {
-    //this->pSprite->setTextureRect(sf::IntRect(source.x * 32,source.y * 32,32,32));
     window->draw(*this->pSprite);
-    window->draw(rectangleShape1);
+    //window->draw(rectangleShape1);
 
 }

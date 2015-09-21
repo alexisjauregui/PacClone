@@ -21,6 +21,7 @@ public:
     sf::Vector2f* velocity;
     sf::RectangleShape rectangleShape1;
     sf::Sound* wakka;
+    bool reset;
 
 private:
     sf::Texture pTexture;
